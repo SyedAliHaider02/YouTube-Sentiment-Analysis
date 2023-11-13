@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Comment Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #333;
+            background-color: #e0e0e0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Comment Analysis</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <label for="url">Enter the URL:</label>
+        {{ form.url(size=40) }}
+        <br>
+        <label for="comment">Comment:</label>
+        {{ form.comment(size=40) }}
+        <br>
+        {{ form.submit }}
+    </form>
+    
+    {% if accuracy_score %}
+    <h2>Accuracy:</h2>
+    <p>{{ accuracy_score }}%</p>
+    <h2>Prediction:</h2>
+    <p>{% if prediction == 1 %}
+        Positive
+        {% endif %}
+
+        {% if prediction == 0 %}
+        Negative
+        {% endif %}
+    </p>
+    <h2>Top Ten Comments</h2>
+
+    <table border="1">
+        <tr>
+            <th>Comment</th>
+            <th>Likes</th>
+        </tr>
+        {% for item, like_count in comments_with_likes %}
+        <tr>
+            <td>{{ item }}</td>
+            <td>{{ like_count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
