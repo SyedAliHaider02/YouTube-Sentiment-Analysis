@@ -14,7 +14,7 @@ vidkey=key(string)
 
 api_service_name = "youtube"
 api_version = "v3"
-DEVELOPER_KEY = "AIzaSyDWCrNAYPqjieCCzC6Un2jEsmYlPkELJlI"  # Replace with your actual API key
+DEVELOPER_KEY = "YOUR API KEY"  # Replace with your actual API key
 
 youtube = googleapiclient.discovery.build(api_service_name, api_version, developerKey=DEVELOPER_KEY)
 
